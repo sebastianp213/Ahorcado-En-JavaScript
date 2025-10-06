@@ -1,7 +1,8 @@
 let vidas = 6;
 let palabras = ["JAVASCRIPT", "HTML", "CSS", "PROGRAMACION", "ANIMALES", "GATOS", "PERROS", "FRUTA", "VERDURA", "CIUDAD", "PAIS", "MONUMENTO"];
 
-let palabra = Math.floor(Math.random() * palabras.length);
+// hago un numero aleatorio entre 0 y la cantidad de palabras que hay en el array
+let palabra = Math.floor(Math.random() * palabras.length); 
 
 // palabra correcta
 let palabraCorrecta = palabras[palabra];
@@ -23,12 +24,14 @@ function actualizarPantalla(){
     let h3 = document.getElementById("vidas");
     let pre = document.getElementById("letrasNoEnPalabra");
 
+    
     pre.textContent = "Letras que no estan en la palabra: " + letrasNoEnPalabra.join(" ");
 
-    // actualizar el contenido de h2 y h3
+    // actualizo el contenido de h2 y h3
     h2.textContent = "";
     h3.textContent = "Vidas: " + vidas;
     
+    // recorro el array de la palabra a adivinar y lo muestro en pantalla
     for(let letter of palabraAdivinar){
         h2.textContent += letter + " ";
     }
@@ -40,7 +43,7 @@ function handleSubmit(event){
     // evitar que se recargue la pagina
     event.preventDefault(); 
     
-    // obtener la letra del formulario
+    // obtiene lo que el jugador escribió y lo pasa a mayusculas y guarda en la varialble letter
     let letter = event.target.letter.value.toUpperCase();
 
     // si la persona elije una palabra en vez de una letra
@@ -72,7 +75,7 @@ function handleSubmit(event){
 
     if(fallo){ // y esto es si no coincide y resta vida
         vidas--;
-        letrasNoEnPalabra.push(letter);
+        letrasNoEnPalabra.push(letter); 
     }
 
     actualizarPantalla();   
@@ -88,12 +91,12 @@ function handleSubmit(event){
 function gano(){
     document.querySelector("form > input").disabled = true; // esto es para que no se pueda seguir escribiendo luego de ganar
 
-    let h1 = document.querySelector("h1");
+    let h1 = document.querySelector("h1"); 
     h1.textContent = "Muy bien, ganaste!";
 }
 
 function gameOver(){
     document.querySelector("form > input").disabled = true; // lo mismo que la funcion gano
-    let h1 = document.querySelector("h1"); 
+    let h1 = document.querySelector("h1");  
     h1.textContent = "Game over, la palabra era " + palabraCorrecta;
 }
